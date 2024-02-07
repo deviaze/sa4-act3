@@ -4,13 +4,14 @@
 
 number = 10
 print("I'm thinking of a number...")
-    
+
 while guess := input("What number am I thinking of? "):
-    if guess.strip() == str(number):
-        print("Congratulations! You guessed the right number.")
-    elif guess == "q":
-        print(f"Game quit; number was {number}")
+    if guess != "q":
+        if (guess := int(guess)) == number:
+            print("Congratulations! You guessed the right number.")
+        else:
+            print(f"Try again! You guessed too {'low' if guess < number else 'high'}.")
+            continue
     else:
-        print(f"Sorry! Please try again (or q to quit)")
-        continue
+        print(f"Game quit; number was {number}")
     break
