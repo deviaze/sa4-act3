@@ -3,19 +3,21 @@
     # by dev chrysalis
 
 number = 10
-print("I'm thinking of a number...")
+print("I'm thinking of a number...\n")
 
 guesses_left = 3
 while guess := input("What number am I thinking of? "):
-    if guesses_left > 1:
-        if guess.strip() == str(number):
+    if guess != "q":
+        guesses_left -= 1
+        es = "es" if guesses_left > 1 else ""
+        if (guess := int(guess)) == number:
             print("Congratulations! You guessed the right number.")
-        elif guess == "q":
-            print(f"Game quit; number was {number}")
-        else:
-            guesses_left -= 1
-            print(f"{guesses_left} guesses left! Please try again (or q to quit)")
+        elif guesses_left > 0:
+            print(f"You guessed too {'low' if guess < number else 'high'}.\n"
+            + f"Please try again! You have {guesses_left} guess{es} left (q to quit)\n")
             continue
+        else:
+            print(f"You ran out of guesses! The number was {number}")
     else:
-        print(f"You ran out of guesses! The number was {number}.")
+        print(f"Game quit. The number was {number}")
     break
